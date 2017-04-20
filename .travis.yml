@@ -4,10 +4,11 @@ language: java
 jdk:
   - oraclejdk8
 
-
 script:
   - mvn clean package
 
 after_success:
   - java -jar target/benchmarks.jar StatesVolatile -wi 5 -i 5 -t 4 -f 1
   - java -jar target/benchmarks.jar StatesNonVolatile -wi 5 -i 5 -t 4 -f 1
+  - java -Djava.compiler=NONE -jar target/benchmarks.jar StatesVolatile -wi 5 -i 5 -t 4 -f 1
+  - java -Djava.compiler=NONE -jar target/benchmarks.jar StatesNonVolatile -wi 5 -i 5 -t 4 -f 1
